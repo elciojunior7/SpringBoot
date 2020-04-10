@@ -22,7 +22,7 @@ public class Autor {
    @Column(name = "NOME", nullable = false, unique = true)
    private String nome;
    
-   @OneToMany(mappedBy = "livro")
+   @OneToMany(mappedBy = "autor")
    private List<Livro> livros = new ArrayList<>();
 
 	public long getId() {
