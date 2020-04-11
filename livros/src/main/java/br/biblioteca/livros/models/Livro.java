@@ -1,8 +1,10 @@
-package br.biblioteca.livros.model;
+package br.biblioteca.livros.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,8 +15,7 @@ import javax.persistence.Table;
 public class Livro {
 
 	@Id
-	@GeneratedValue
-	@Column(name = "ID_LIVRO")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@Column(name = "NOME", nullable = false, unique = true)
@@ -23,8 +24,8 @@ public class Livro {
 	@Column(name = "QTDEPAGINAS")
 	private String qtdePaginas;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_AUTOR")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AUTOR_ID")
 	private Autor autor;
 
 	public long getId() {
