@@ -7,7 +7,6 @@
   	<link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
 	<link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap-theme.min.css}" />
 	<link rel="stylesheet" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.css}" />
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <title>Livros</title>
 </head>
 <body class="container-fluid">
@@ -47,13 +46,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="livro: ${livros}">
-					<td th:text="${livro.id}"></td>
-					<td th:text="${livro.nome}"></td>
-					<td th:text="${livro.qtdePaginas}"></td>
-					<td th:text="${livro?.autor?.nome}"></td>
-					<td><a href="/livro/alterar/1" th:href="@{'/livros/alterar/'+${livro.id}}">Alterar</a></td>
-					<td><a href="/livro/alterar/1" th:href="@{'/livros/excluir/'+${livro.id}}">Excluir</a></td>
+				<tr th:each="liv: ${livros}">
+					<td th:text="${liv.id}"></td>
+					<td th:text="${liv.nome}"></td>
+					<td th:text="${liv.qtdePaginas}"></td>
+					<td th:text="${liv?.autor?.nome}"></td>
+					<td><a href="/livr/alterar/1" th:href="@{'/livros/alterar/'+${liv.id}}">Alterar</a></td>
+					<td><a href="/livro/alterar/1" th:href="@{'/livros/excluir/'+${liv.id}}">Excluir</a></td>
 				</tr>
 			</tbody>
 		</table>	

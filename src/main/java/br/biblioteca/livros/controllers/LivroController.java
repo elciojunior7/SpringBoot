@@ -39,7 +39,7 @@ public class LivroController {
 
 	@GetMapping("/novo")
 	public ModelAndView novo() {
-		ModelAndView modelAndView = new ModelAndView(PATH + "list");
+		ModelAndView modelAndView = new ModelAndView(PATH + "form");
 		List<Autor> listaAutores = autorService.listaAutores();
 		modelAndView.addObject("listaAutores", listaAutores);
 		return modelAndView;
