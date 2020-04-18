@@ -26,15 +26,16 @@
 
 	<section class="text-center">
 		<form method="post" action="#" th:action="@{/livro/gravar}" th:object="${livro}" class="jumbotron">
-				<input type="hidden" th:field="*{id}">
-				Nome: <input type="text" th:field="*{nome}">
-				<span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Error</span><br>
-				Quantidade Páginas: <input type="text" th:field="*{qtdePaginas}">
-				<span  th:if="${#fields.hasErrors('qtdePaginas')}" th:errors="*{qtdePaginas}">Error</span><br>
-				Autor: <select th:field="*{autor}">
-	        	<option value="">Selecione o Autor</option>
-	        	<option th:each="autor : ${listaAutores}" th:value="${autor.id}" th:text="${autor.nome} " selected="selected"></option></select><br>
-		    <input type="submit" class="btn btn-primary">
+			<input type="hidden" th:field="*{id}" />
+			Nome: <input type="text" th:field="*{nome}" />
+			<span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Error</span><br>
+			Quantidade Páginas: <input type="text" th:field="*{qtdePaginas}">
+			<span  th:if="${#fields.hasErrors('qtdePaginas')}" th:errors="*{qtdePaginas}">Error</span><br>
+			Autor: <select th:field="*{autor}">
+				<option value="">Selecione o Autor</option>
+				<option th:each="autor : ${listaAutores}" th:value="${autor.id}" th:text="${autor.nome} " selected="selected"></option>
+			</select><br>
+		    <input type="submit" class="btn btn-primary" />
 		</form>	
 		<a href="#" th:href="@{/livro/novo}">Novo</a>
 		<table>

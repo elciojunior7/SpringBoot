@@ -2,10 +2,13 @@ package br.biblioteca.livros.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +32,10 @@ public class LivroController {
 	AutorService autorService;
 
 	@GetMapping("/list")
-	public ModelAndView list() {
+	public ModelAndView list(@ModelAttribute Livro livro) {
 		ModelAndView modelAndView = new ModelAndView(PATH + "list");
-
+		List<Autor> listaAutores = autorService.listaAutores();
+		modelAndView.addObject("listaAutores", listaAutores);
 		List<Livro> listaLivros = livroService.listaTodosLivros();
 
 		return modelAndView.addObject("livros", listaLivros);
@@ -39,14 +43,15 @@ public class LivroController {
 
 	@GetMapping("/novo")
 	public ModelAndView novo() {
-		ModelAndView modelAndView = new ModelAndView(PATH + "form");
+		ModelAndView modelAndView = new ModelAndView(PATH + "list");
 		List<Autor> listaAutores = autorService.listaAutores();
 		modelAndView.addObject("listaAutores", listaAutores);
-		return modelAndView;
+		List<Livro> listaLivros = livroService.listaTodosLivros();
+		return modelAndView.addObject("livros", listaLivros);
 	}
 
 	@PostMapping("/gravar")
-	public ModelAndView gravar(Livro livro, BindingResult bindingResult) {
+	public ModelAndView gravar(@Valid Livro livro, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			List<Autor> listaAutores = autorService.listaAutores();
 			return new ModelAndView(PATH + "list", "listaAutores", listaAutores);
