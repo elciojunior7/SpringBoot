@@ -22,8 +22,8 @@ import br.biblioteca.livros.services.LivroService;
 @Controller
 @RequestMapping("/livro")
 public class LivroController {
-	private final String PATH = "livro/";
-	private final String REDIR_PATH = "redirect:livro/";
+	private final String PATH = "/livro/";
+	private final String REDIR_PATH = "redirect:/livro/";
 
 	@Autowired
 	LivroService livroService;
@@ -42,7 +42,7 @@ public class LivroController {
 	}
 
 	@GetMapping("/novo")
-	public ModelAndView novo() {
+	public ModelAndView novo(@ModelAttribute Livro livro) {
 		ModelAndView modelAndView = new ModelAndView(PATH + "list");
 		List<Autor> listaAutores = autorService.listaAutores();
 		modelAndView.addObject("listaAutores", listaAutores);
@@ -64,12 +64,12 @@ public class LivroController {
 	@GetMapping("/alterar/{id}")
 	public ModelAndView alterar(@PathVariable("id") Long id) {
 		Livro livro = livroService.buscarLivro(id);
-
 		List<Autor> listaAutores = autorService.listaAutores();
-
-		ModelAndView modelAndView = new ModelAndView(REDIR_PATH + "list");
+		List<Livro> listaLivros = livroService.listaTodosLivros();
+		ModelAndView modelAndView = new ModelAndView(PATH + "list");
 		modelAndView.addObject("listaAutores", listaAutores);
 		modelAndView.addObject("livro", livro);
+		modelAndView.addObject("livros", listaLivros);
 		return modelAndView;
 	}
 
