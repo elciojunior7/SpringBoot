@@ -18,4 +18,16 @@ public class LivroService {
 		// return livroRepository.findAll();
 		return livroRepository.listaLivros();
 	}
+
+	public void salvarLivro(Livro livro) {
+		livroRepository.save(livro);
+	}
+
+	public Livro buscarLivro(Long id) {
+		return livroRepository.findById(id).orElseThrow(() -> new RuntimeException());
+	}
+
+	public void excluirLivro(Long id) {
+		livroRepository.deleteById(id);
+	}
 }

@@ -4,13 +4,16 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.biblioteca.livros.models.Autor;
 import br.biblioteca.livros.models.Livro;
+import br.biblioteca.livros.services.AutorService;
 import br.biblioteca.livros.services.LivroService;
 
 @Controller
@@ -21,6 +24,9 @@ public class LivroController {
 
 	@Autowired
 	LivroService livroService;
+
+	@Autowired
+	AutorService autorService;
 
 	@GetMapping("/list")
 	public ModelAndView list() {
@@ -33,29 +39,40 @@ public class LivroController {
 
 	@GetMapping("/novo")
 	public ModelAndView novo() {
-		return new ModelAndView(PATH + "list");
+		ModelAndView modelAndView = new ModelAndView(PATH + "list");
+		List<Autor> listaAutores = autorService.listaAutores();
+		modelAndView.addObject("listaAutores", listaAutores);
+		return modelAndView;
 	}
 
 	@PostMapping("/gravar")
-	public ModelAndView gravar(Livro livro) {
+	public ModelAndView gravar(Livro livro, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			List<Autor> listaAutores = autorService.listaAutores();
+			return new ModelAndView("livros/form", "listaAutores", listaAutores);
+		}
+
+		livroService.salvarLivro(livro);
 		return new ModelAndView(PATH + "list");
 	}
 
 	@GetMapping("/alterar/{id}")
 	public ModelAndView alterar(@PathVariable("id") Long id) {
-		System.out.println(id);
+		Livro livro = livroService.buscarLivro(id);
 
-		ModelAndView modelAndView = new ModelAndView(REDIR_PATH + "list");
-		modelAndView.addObject("meuID", id);
+		List<Autor> listaAutores = autorService.listaAutores();
+
+		ModelAndView modelAndView = new ModelAndView("livros/form");
+		modelAndView.addObject("listaAutores", listaAutores);
+		modelAndView.addObject("livro", livro);
 		return modelAndView;
 	}
 
 	@GetMapping("/excluir/{id}")
 	public ModelAndView excluir(@PathVariable("id") Long id) {
-		System.out.println(id);
 
+		livroService.excluirLivro(id);
 		ModelAndView modelAndView = new ModelAndView(REDIR_PATH + "list");
-		modelAndView.addObject("meuID", id);
 		return modelAndView;
 	}
 
