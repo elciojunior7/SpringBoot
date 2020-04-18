@@ -49,11 +49,11 @@ public class LivroController {
 	public ModelAndView gravar(Livro livro, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			List<Autor> listaAutores = autorService.listaAutores();
-			return new ModelAndView("livros/form", "listaAutores", listaAutores);
+			return new ModelAndView(PATH + "list", "listaAutores", listaAutores);
 		}
 
 		livroService.salvarLivro(livro);
-		return new ModelAndView(PATH + "list");
+		return new ModelAndView(REDIR_PATH + "list");
 	}
 
 	@GetMapping("/alterar/{id}")
@@ -62,7 +62,7 @@ public class LivroController {
 
 		List<Autor> listaAutores = autorService.listaAutores();
 
-		ModelAndView modelAndView = new ModelAndView("livros/form");
+		ModelAndView modelAndView = new ModelAndView(REDIR_PATH + "list");
 		modelAndView.addObject("listaAutores", listaAutores);
 		modelAndView.addObject("livro", livro);
 		return modelAndView;

@@ -6,7 +6,8 @@
   	<meta charset="UTF-8">
   	<link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
 	<link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap-theme.min.css}" />
-    <link rel="stylesheet" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.css}" />
+	<link rel="stylesheet" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.css}" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <title>Livros</title>
 </head>
 <body class="container-fluid">
@@ -16,7 +17,7 @@
 	    <div class="navbar-nav">
 	    <a class="nav-item nav-link" href="/">Home <span class="sr-only">(Página atual)</span></a>
 	      <a class="nav-item nav-link active" href="/livro/list">Lista de Livros</a>
-	      <a class="nav-item nav-link" href="/livro/form">Inserir Livros</a>
+	      <a class="nav-item nav-link" href="/livro/list">Inserir Livros</a>
 	    </div>
 	  </div>
 	</nav>
@@ -25,11 +26,18 @@
 	</blockquote>
 
 	<section class="text-center">
-	   <form method="post" action="/livros/gravar" class="jumbotron">
-		    Nome: <input type="text" name="nome">
-		    Quantidade Páginas: <input type="text" name="quantidadePaginas">
+		<form method="post" action="#" th:action="@{/livro/gravar}" th:object="${livro}" class="jumbotron">
+				<input type="hidden" th:field="*{id}">
+				Nome: <input type="text" th:field="*{nome}">
+				<span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Error</span><br>
+				Quantidade Páginas: <input type="text" th:field="*{qtdePaginas}">
+				<span  th:if="${#fields.hasErrors('qtdePaginas')}" th:errors="*{qtdePaginas}">Error</span><br>
+				Autor: <select th:field="*{autor}">
+	        	<option value="">Selecione o Autor</option>
+	        	<option th:each="autor : ${listaAutores}" th:value="${autor.id}" th:text="${autor.nome} " selected="selected"></option></select><br>
 		    <input type="submit" class="btn btn-primary">
 		</form>	
+		<a href="#" th:href="@{/livro/novo}">Novo</a>
 		<table>
 			<thead>
 				<tr>
@@ -44,8 +52,8 @@
 					<td th:text="${livro.nome}"></td>
 					<td th:text="${livro.qtdePaginas}"></td>
 					<td th:text="${livro?.autor?.nome}"></td>
-					<td><a href="#">Alterar</a></td>
-					<td><a href="#">Excluir</a></td>
+					<td><a href="/livro/alterar/1" th:href="@{'/livros/alterar/'+${livro.id}}">Alterar</a></td>
+					<td><a href="/livro/alterar/1" th:href="@{'/livros/excluir/'+${livro.id}}">Excluir</a></td>
 				</tr>
 			</tbody>
 		</table>	

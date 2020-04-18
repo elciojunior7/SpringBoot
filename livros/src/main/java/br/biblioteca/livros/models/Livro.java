@@ -15,6 +15,7 @@ import javax.persistence.Table;
 public class Livro {
 
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
