@@ -13,6 +13,7 @@ public class LivroConverter {
 		dto.setTitulo(livro.getNome());
 		dto.setQtdePaginas(livro.getQtdePaginas());
 		dto.setAutor(livro.getAutor() != null ? livro.getAutor().getNome() : null);
+		dto.setAvaliacoes(AvaliacaoConverter.toDTO(livro.getAvaliacoes()));
 		return dto;
 	}
 
