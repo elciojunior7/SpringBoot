@@ -33,7 +33,7 @@ public class LivroController {
 
 	@GetMapping("/list")
 	public ModelAndView list(@ModelAttribute Livro livro) {
-		ModelAndView modelAndView = new ModelAndView(PATH + "list");
+		ModelAndView modelAndView = new ModelAndView("livro/list");
 		List<Autor> listaAutores = autorService.listaAutores();
 		modelAndView.addObject("listaAutores", listaAutores);
 		List<Livro> listaLivros = livroService.listaTodosLivros();
@@ -43,7 +43,7 @@ public class LivroController {
 
 	@GetMapping("/novo")
 	public ModelAndView novo(@ModelAttribute Livro livro) {
-		ModelAndView modelAndView = new ModelAndView(PATH + "list");
+		ModelAndView modelAndView = new ModelAndView("livro/form");
 		List<Autor> listaAutores = autorService.listaAutores();
 		modelAndView.addObject("listaAutores", listaAutores);
 		List<Livro> listaLivros = livroService.listaTodosLivros();
@@ -54,11 +54,11 @@ public class LivroController {
 	public ModelAndView gravar(@Valid Livro livro, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			List<Autor> listaAutores = autorService.listaAutores();
-			return new ModelAndView(PATH + "list", "listaAutores", listaAutores);
+			return new ModelAndView("livro/form", "listaAutores", listaAutores);
 		}
 
 		livroService.salvarLivro(livro);
-		return new ModelAndView(REDIR_PATH + "list");
+		return new ModelAndView("redirect:/livro/list");
 	}
 
 	@GetMapping("/alterar/{id}")
@@ -66,7 +66,7 @@ public class LivroController {
 		Livro livro = livroService.buscarLivro(id);
 		List<Autor> listaAutores = autorService.listaAutores();
 		List<Livro> listaLivros = livroService.listaTodosLivros();
-		ModelAndView modelAndView = new ModelAndView(PATH + "list");
+		ModelAndView modelAndView = new ModelAndView("livro/list");
 		modelAndView.addObject("listaAutores", listaAutores);
 		modelAndView.addObject("livro", livro);
 		modelAndView.addObject("livros", listaLivros);
@@ -77,7 +77,7 @@ public class LivroController {
 	public ModelAndView excluir(@PathVariable("id") Long id) {
 
 		livroService.excluirLivro(id);
-		ModelAndView modelAndView = new ModelAndView(REDIR_PATH + "list");
+		ModelAndView modelAndView = new ModelAndView("redirect:/livro/list");
 		return modelAndView;
 	}
 
