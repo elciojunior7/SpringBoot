@@ -1,0 +1,100 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org"
+  	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  	layout:decorate="layout">
+<head>
+  	<meta charset="UTF-8">
+  	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap-theme.min.css}" />
+	<link rel="stylesheet" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.css}" />
+	<style>
+
+	</style>
+  <title>Livros</title>
+</head>
+<body class="container-fluid">
+	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	    <div class="navbar-nav">
+	    <a class="nav-item nav-link" href="/">Home <span class="sr-only">(Página atual)</span></a>
+	      <a class="nav-item nav-link active" href="/livro/list">Lista de Livros</a>
+	      <a class="nav-item nav-link" href="/livro/list">Inserir Livros</a>
+	    </div>
+	  </div>
+	</nav>
+
+	<section class="text-center">
+		<form method="post" action="#" th:action="@{/livro/gravar}" th:object="${livro}" class="jumbotron">
+			<input type="hidden" th:field="*{id}" />
+			<div class="row justify-content-md-center">
+				<div class="col-md-auto col-sm-12">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<span>Nome</span>
+							</span>                    
+						</div>
+						<input type="text" th:field="*{nome}" placeholder="Nome" th:required="required" />
+						<span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Error</span><br>
+					</div>
+				</div>
+				<div class="col-md-auto col-sm-12">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<span>Qtde Páginas</span>
+							</span>                    
+						</div>
+						<input type="number" th:field="*{qtdePaginas}" placeholder="Quantidade de Páginas" th:required="required">
+						<span  th:if="${#fields.hasErrors('qtdePaginas')}" th:errors="*{qtdePaginas}">Error</span><br>
+					</div>
+				</div>
+				<div class="col-md-auto col-sm-12">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<span>Autor</span>
+							</span>                    
+						</div>
+						<select th:field="*{autor}">
+							<option value="">Selecione o Autor</option>
+							<option th:each="autor : ${listaAutores}" th:value="${autor.id}" th:text="${autor.nome} " selected="selected"></option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-auto col-sm-12">
+					<div class="input-group">
+						<input type="submit" class="btn btn-primary" value="Cadastrar">
+					</div>
+				</div>
+			</div>
+		</form>	
+		<a href="#" th:href="@{/livro/novo}">Novo</a>
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>NOME</th>
+					<th>PÁGINAS</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="liv: ${livros}">
+					<td th:text="${liv.id}"></td>
+					<td th:text="${liv.nome}"></td>
+					<td th:text="${liv.qtdePaginas}"></td>
+					<td th:text="${liv?.autor?.nome}"></td>
+					<td><a href="#" th:href="@{'/livro/alterar/'+${liv.id}}">Alterar</a></td>
+					<td><a href="#" th:href="@{'/livro/excluir/'+${liv.id}}">Excluir</a></td>
+				</tr>
+			</tbody>
+		</table>	
+	</section>
+	
+</body>
+<script type="text/javascript" th:src="@{/webjars/jquery/3.1.1/jquery.min.js}" ></script>
+<script type="text/javascript" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.js}" ></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}" ></script>
+
+</html>
