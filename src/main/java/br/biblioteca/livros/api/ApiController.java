@@ -4,6 +4,8 @@ import static br.biblioteca.livros.conversores.LivroConverter.toDTO;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +35,7 @@ public class ApiController {
 	}
 
 	@PostMapping("/livros/avaliacao/{id}")
-	public ResponseEntity<Long> comentar(@PathVariable("id") Long id, @RequestBody AvaliacaoDTO avaliacaoDTO) {
+	public ResponseEntity<Long> comentar(@PathVariable("id") Long id, @Valid @RequestBody AvaliacaoDTO avaliacaoDTO) {
 
 		try {
 			return ResponseEntity.ok(apiController.salvarAvaliacao(id, avaliacaoDTO));
