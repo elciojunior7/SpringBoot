@@ -8,30 +8,6 @@
 </head>
 <body>
 
-<h1 layout:fragment="header">
-    <a th:href="@{/livro/novo}" class="btn btn-sm btn-info"><i class="glyphicon glyphicon-plus"></i></a>
-    Livros
-</h1>
-
-<div layout:fragment="content" class="container">	
-	<table>
-		<tr>
-			<th>ID DO LIVRO</th>
-			<th>NOME</th>
-			<th>AUTOR</th>
-			<th>PÁGINAS</th>
-			<th></th>
-			<th></th>
-		</tr>
-		<tr th:each="livro : ${livros}">
-			<td th:text="${livro.id}">id do livro</td>
-			<td th:text="${livro?.nome}">nome do livro</td>
-			<td th:text="${livro?.autor?.nome}">nome do autor</td>
-			<td th:text="${livro?.qtdePaginas}">total de páginas do livro</td>
-			<td><a href="/livros/alterar/1" th:href="@{'/livros/alterar/'+${livro.id}}">Alterar</a></td>
-			<td><a href="/livros/alterar/1" th:href="@{'/livros/excluir/'+${livro.id}}">Excluir</a></td>
-		</tr>
-	</table>
-</div>
+TESTE
 </body>
 </html>
