@@ -43,7 +43,7 @@ public class LivroController {
 
 	@GetMapping("/novo")
 	public ModelAndView novo(@ModelAttribute Livro livro) {
-		ModelAndView modelAndView = new ModelAndView("livro/form");
+		ModelAndView modelAndView = new ModelAndView("livro/list");
 		List<Autor> listaAutores = autorService.listaAutores();
 		modelAndView.addObject("listaAutores", listaAutores);
 		List<Livro> listaLivros = livroService.listaTodosLivros();

@@ -1,12 +1,130 @@
-<!DOCTYPE html>
+<!DOCTYPE html>  
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <meta charset="UTF-8" />
-    <title>Insert title here</title>
-</head>
-<body>
+  	<meta charset="UTF-8">
+  	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap-theme.min.css}" />
+	<link rel="stylesheet" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.css}" />
+	<link rel="stylesheet" th:src="@{/webjars/font-awesome/5.13.0/css/all.min.css}" />
+	<style>
+		.jumbotron{
+			margin-bottom: 0;
+		}
+		header{
+			text-align: center;
+			font-size: 350%;
+			padding: 10px 0;
+		}
+		.input-group-text{
+			text-align: center;
+			width: 90px;
+		}
+		select{
+			width: 207px;
+		}
 
-TESTE
+	</style>
+
+  <title>Livros</title>
+</head>
+<body class="container-fluid">
+	
+	<nav class="navbar navbar-expand navbar-light bg-light">
+	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	    <div class="navbar-nav">
+	    	<a class="nav-item nav-link" th:href="@{/}" href="#">Home <span class="sr-only">(Página atual)</span></a>
+	    	<a class="nav-item nav-link" th:href="@{/livro/list}" href="#">Livros</a>
+	    </div>
+	  </div>
+	</nav>
+
+	<header class="bg-info text-white">
+		<span class=" fas fa-book"></span><h1>LIVROS</h1>
+	</header>
+	<section >
+		<form method="post" action="#" th:action="@{/livro/gravar}" th:object="${livro}" class="jumbotron">
+			<input type="hidden" th:field="*{id}" />
+			<div class="row justify-content-md-center">
+				<div class="col-md-auto col-sm-12">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<span>Nome</span>
+							</span>                    
+						</div>
+						<input type="text" th:field="*{nome}" placeholder="Nome" th:required="required" />
+						<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Error</span><br>
+					</div>
+				</div>
+				<div class="col-md-auto col-sm-12">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<span>Qtd Pags</span>
+							</span>                    
+						</div>
+						<input type="number" th:field="*{qtdePaginas}" placeholder="Quantidade de Páginas" th:required="required">
+						<span  th:if="${#fields.hasErrors('qtdePaginas')}" th:errors="*{qtdePaginas}">Error</span><br>
+					</div>
+				</div>
+				<div class="col-md-auto col-sm-12">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<span>Autor</span>
+							</span>                    
+						</div>
+						<select th:field="*{autor}">
+							<option value="">Selecione o Autor</option>
+							<option th:each="autor : ${listaAutores}" th:value="${autor.id}" th:text="${autor.nome} " selected="selected"></option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-auto col-sm-12">
+					<div class="input-group">
+						<button type="submit" class="btn btn-primary font-weight-bold" aria-label="Left Align">
+							<span class="far fa-save" aria-hidden="true"></span> Cadastrar
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>	
+		<table class="table table-striped">
+			<thead class="thead-light">
+				<tr>
+					<th>ID</th>
+					<th>NOME</th>
+					<th>PÁGINAS</th>
+					<th>AUTOR</th>
+					<th>Editar</th>
+					<th>Excluir</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="liv: ${livros}">
+					<td th:text="${liv.id}"></td>
+					<td th:text="${liv.nome}"></td>
+					<td th:text="${liv.qtdePaginas}"></td>
+					<td th:text="${liv?.autor?.nome}"></td>
+					<td><a href="#" th:href="@{'/livro/alterar/'+${liv.id}}" data-toggle="tooltip" data-placement="left" title="Editar Livro" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
+					<td><a href="#" th:href="@{'/livro/excluir/'+${liv.id}}" data-toggle="tooltip" data-placement="left" title="Excluir Livro" class="btn btn-danger"><i class="fas fa-trash"></i></a></td>
+				</tr>
+			</tbody>
+		</table>
+		<a href="#" th:href="@{/livro/novo}" class="btn btn-primary font-weight-bold"><i class="far fa-file"></i> Novo</a>
+	</section>
+	
 </body>
+<script type="text/javascript" th:src="@{/webjars/jquery/3.1.1/jquery.min.js}" ></script>
+<script type="text/javascript" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.js}" ></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}" ></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.bundle.min.js}" ></script>
+<script rel="stylesheet" th:src="@{/webjars/font-awesome/5.13.0/js/all.min.js}" ></script>
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+
 </html>
