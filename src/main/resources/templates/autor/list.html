@@ -1,0 +1,62 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="layout">
+<head>
+  	<meta charset="UTF-8">
+  	<title>Autores</title>
+</head>
+<body class="container-fluid">
+
+	<header layout:fragment="header" class="bg-info text-white">
+		<span class=" fas fa-feather-alt"></span><h1>AUTORES</h1>
+	</header>
+	<section layout:fragment="content" >
+		<form method="post" action="#" th:action="@{/autor/gravar}" th:object="${autor}" class="jumbotron">
+			<input type="hidden" th:field="*{id}" />
+			<div class="row justify-content-md-center">
+				<div class="col-md-auto col-sm-12">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<span>Nome</span>
+							</span>                    
+						</div>
+						<input type="text" th:field="*{nome}" placeholder="Nome" th:required="required" />
+						<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Error</span><br>
+					</div>
+				</div>
+				<div class="col-md-auto col-sm-12">
+					<div class="input-group">
+						<button type="submit" class="btn btn-primary font-weight-bold" aria-label="Left Align">
+							<span class="far fa-save" aria-hidden="true"></span> Cadastrar
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>	
+		<table class="table table-striped">
+			<thead class="thead-light">
+				<tr>
+					<th>ID</th>
+					<th>NOME</th>
+					<th>LIVROS</th>
+					<th>Editar</th>
+					<th>Excluir</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="aut: ${autores}">
+					<td th:text="${aut.id}"></td>
+					<td th:text="${aut.nome}"></td>
+					<td th:text="teste"></td>
+					<td><a href="#" th:href="@{'/autor/alterar/'+${aut.id}}" data-toggle="tooltip" data-placement="left" title="Editar Autor" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
+					<td><a href="#" th:href="@{'/autor/excluir/'+${aut.id}}" data-toggle="tooltip" data-placement="left" title="Excluir Autor" class="btn btn-danger"><i class="fas fa-trash"></i></a></td>
+				</tr>
+			</tbody>
+		</table>
+		<a href="#" th:href="@{autor/novo}" class="btn btn-primary font-weight-bold"><i class="far fa-file"></i> Novo</a>
+	</section>
+	
+</body>
+</html>

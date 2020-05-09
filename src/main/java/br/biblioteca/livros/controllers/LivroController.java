@@ -54,11 +54,11 @@ public class LivroController {
 	public ModelAndView gravar(@Valid Livro livro, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			List<Autor> listaAutores = autorService.listaAutores();
-			return new ModelAndView("livro/form", "listaAutores", listaAutores);
+			return new ModelAndView("livro/list", "listaAutores", listaAutores);
 		}
 
 		livroService.salvarLivro(livro);
-		return new ModelAndView("redirect:livro/list");
+		return new ModelAndView("redirect:/livro/list");
 	}
 
 	@GetMapping("/alterar/{id}")
@@ -77,7 +77,7 @@ public class LivroController {
 	public ModelAndView excluir(@PathVariable("id") Long id) {
 
 		livroService.excluirLivro(id);
-		ModelAndView modelAndView = new ModelAndView("redirect:livro/list");
+		ModelAndView modelAndView = new ModelAndView("redirect:/livro/list");
 		return modelAndView;
 	}
 
