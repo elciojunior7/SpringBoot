@@ -19,7 +19,7 @@ import br.biblioteca.livros.services.AutorService;
 import br.biblioteca.livros.services.LivroService;
 
 @Controller
-@RequestMapping("/autor")
+@RequestMapping("autor")
 public class AutorController {
 
 	@Autowired

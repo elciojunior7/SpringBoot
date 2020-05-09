@@ -20,7 +20,7 @@ import br.biblioteca.livros.services.AutorService;
 import br.biblioteca.livros.services.LivroService;
 
 @Controller
-@RequestMapping("/livro")
+@RequestMapping("livro")
 public class LivroController {
 	private final String PATH = "livro/";
 	private final String REDIR_PATH = "redirect:/livro/";
