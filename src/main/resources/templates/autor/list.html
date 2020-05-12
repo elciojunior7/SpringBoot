@@ -11,7 +11,7 @@
 	<header layout:fragment="header" class="bg-info text-white">
 		<span class=" fas fa-feather-alt"></span><h1>AUTORES</h1>
 	</header>
-	<section layout:fragment="content" >
+	<section layout:fragment="content" class="autorLivro" >
 		<form method="post" action="#" th:action="@{/autor/gravar}" th:object="${autor}" class="jumbotron">
 			<input type="hidden" th:field="*{id}" />
 			<div class="row justify-content-md-center">
@@ -40,7 +40,6 @@
 				<tr>
 					<th>ID</th>
 					<th>NOME</th>
-					<th>LIVROS</th>
 					<th>Editar</th>
 					<th>Excluir</th>
 				</tr>
@@ -49,7 +48,6 @@
 				<tr th:each="aut: ${autores}">
 					<td th:text="${aut.id}"></td>
 					<td th:text="${aut.nome}"></td>
-					<td th:text="teste"></td>
 					<td><a href="#" th:href="@{'/autor/alterar/'+${aut.id}}" data-toggle="tooltip" data-placement="left" title="Editar Autor" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></td>
 					<td><a href="#" th:href="@{'/autor/excluir/'+${aut.id}}" data-toggle="tooltip" data-placement="left" title="Excluir Autor" class="btn btn-danger"><i class="fas fa-trash"></i></a></td>
 				</tr>

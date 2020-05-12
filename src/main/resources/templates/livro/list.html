@@ -11,7 +11,7 @@
 	<header layout:fragment="header" class="bg-info text-white">
 		<span class=" fas fa-book"></span><h1>LIVROS</h1>
 	</header>
-	<section layout:fragment="content" >
+	<section layout:fragment="content" class="autorLivro" >
 		<form method="post" action="#" th:action="@{/livro/gravar}" th:object="${livro}" class="jumbotron">
 			<input type="hidden" th:field="*{id}" />
 			<div class="row justify-content-md-center">
