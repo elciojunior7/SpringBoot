@@ -12,6 +12,7 @@
 		<span class=" fas fa-book"></span><h1>LIVROS</h1>
 	</header>
 	<section layout:fragment="content" class="autorLivro" >
+		<h6 class="btn btn-info font-weight-bold float-left">Olá, <span sec:authentication="name"></span></h6>
 		<a href="#" th:href="@{/usuario/logout}" class="btn btn-info font-weight-bold float-right"><i class="far fa-file"></i> Logout</a>
 		<form method="post" action="#" th:action="@{/livro/gravar}" th:object="${livro}" class="jumbotron">
 			<input type="hidden" th:field="*{id}" />

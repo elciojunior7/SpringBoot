@@ -7,13 +7,37 @@
     <meta charset="UTF-8" />
     <title>Biblioteca</title>
 
+    <!-- Bootstrap -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" />
+	  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap-theme.min.css}" />
+  	<link rel="stylesheet" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.css}" />
+    <link rel="stylesheet" th:src="@{/webjars/font-awesome/5.13.0/css/all.min.css}" />
+    <style>
+		.jumbotron{
+			margin-bottom: 0;
+		}
+		header{
+			text-align: center;
+			font-size: 350%;
+			padding: 10px 0;
+		}
+		.autorLivro .input-group-text{
+			text-align: center;
+			width: 90px;
+		}
+		select{
+			width: 207px;
+		}
+
+	</style>
+
 </head>
 <body>
     <nav class="navbar navbar-expand navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
               <a class="nav-item nav-link" th:href="@{/}" href="#">Home <span class="sr-only">(Página atual)</span></a>
-              <a class="nav-item nav-link" th:href="@{/usuario/login}" href="#">Login</a>
+              <a sec:authorize="!isAuthenticated()" class="nav-item nav-link" th:href="@{/usuario/login}" href="#">Login</a>
               <a class="nav-item nav-link" th:href="@{/livro/list}" href="#">Livros</a>
               <a class="nav-item nav-link" th:href="@{/autor/list}" href="#">Autores</a>
               <a class="nav-item nav-link" th:href="@{/usuario/list}" href="#">Usuários</a>
@@ -23,6 +47,18 @@
     <h1 layout:fragment="header"></h1>
     <div layout:fragment="content"></div>
 
+
+  <!--  JQuery -->
+  <script type="text/javascript" th:src="@{/webjars/jquery/3.1.1/jquery.min.js}" ></script>
+  <script type="text/javascript" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.js}" ></script>
+  <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}" ></script>
+  <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.bundle.min.js}" ></script>
+  <script type="text/javascript" th:src="@{/webjars/font-awesome/5.13.0/js/all.min.js}" ></script>
+  <script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+  </script>
 
 </body>
 </html>

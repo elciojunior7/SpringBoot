@@ -98,7 +98,11 @@ public class UserController {
 		userValidator.validate(usuarioForm, bindingResult);
 
 		if (bindingResult.hasErrors()) {
-			return new ModelAndView("user/registration");
+			ModelAndView modelAndView = new ModelAndView("usuario/registration");
+			modelAndView.addObject("whoIsThis", "Usuário");
+			modelAndView.addObject("target", "Administrador");
+			modelAndView.addObject("link", "/usuario/adminRegistration");
+			return modelAndView.addObject("action", "/usuario/registration");
 		}
 
 		userService.salvarUsuario(usuarioForm);
@@ -121,7 +125,11 @@ public class UserController {
 		userValidator.validate(usuarioForm, bindingResult);
 
 		if (bindingResult.hasErrors()) {
-			return new ModelAndView("usuario/adminRegistration");
+			ModelAndView modelAndView = new ModelAndView("usuario/registration");
+			modelAndView.addObject("whoIsThis", "Administrador");
+			modelAndView.addObject("target", "Usuário");
+			modelAndView.addObject("link", "/usuario/registration");
+			return modelAndView.addObject("action", "/usuario/adminRegistration");
 		}
 
 		userService.salvarAdmin(usuarioForm);

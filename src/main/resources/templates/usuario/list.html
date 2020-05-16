@@ -12,20 +12,19 @@
 		<span class=" fas fa-users"></span><h1>USUÁRIOS</h1>
 	</header>
 	<section layout:fragment="content" class="autorLivro" >
+		<h6 class="btn btn-info font-weight-bold float-left">Olá, <span sec:authentication="name"></span></h6>
 		<a href="#" th:href="@{/usuario/logout}" class="btn btn-info font-weight-bold float-right"><i class="far fa-file"></i> Logout</a>
 		<table class="table table-striped">
 			<thead class="thead-light">
 				<tr>
 					<th>ID</th>
 					<th>USUÁRIO DE ACESSO</th>
-					<th>Excluir</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="user: ${usuarios}">
 					<td th:text="${user.id}"></td>
 					<td th:text="${user.usuario}"></td>
-					<td><a href="#" th:href="@{'/usuario/excluir/'+${user.id}}" data-toggle="tooltip" data-placement="left" title="Excluir Usuário" class="btn btn-danger"><i class="fas fa-trash"></i></a></td>
 				</tr>
 			</tbody>
 		</table>

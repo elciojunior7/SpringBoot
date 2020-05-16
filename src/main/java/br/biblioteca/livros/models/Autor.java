@@ -24,7 +24,7 @@ public class Autor {
 	@Column(name = "NOME", nullable = false, unique = true)
 	private String nome;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "autor", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "autor", cascade = CascadeType.ALL)
 	private List<Livro> livros = new ArrayList<>();
 
 	public long getId() {
