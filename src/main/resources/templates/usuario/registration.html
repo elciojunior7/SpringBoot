@@ -4,15 +4,15 @@
 	  layout:decorate="layout">
 <head>
   	<meta charset="UTF-8">
-  	<title>Autores</title>
+  	<title>Cadastro Usuário</title>
 </head>
 <body class="container-fluid">
 
 	<header layout:fragment="header" class="bg-info text-white">
-		<span class="fas fa-user-plus"></span><h1>CADASTRO</h1>
+		<span class="fas fa-user-plus"></span><h1 th:text="${whoIsThis} + ' - CADASTRO'"></h1>
 	</header>
 	<section layout:fragment="content" class="autorLivro" >
-		<form method="post" action="#" th:object="${user}" class="jumbotron">
+		<form id="usuarioForm" method="post" th:action="${action}" action="#" th:object="${usuarioForm}" class="jumbotron">
 			<input type="hidden" th:field="*{id}" />
 			<div class="row justify-content-md-center">
 				<div class="col-md-auto col-sm-12">
@@ -45,8 +45,12 @@
 					</div>
 				</div>
 			</div>
-		</form>	
-	</section>
-	
+		</form>
+		<div class="mt-4">
+			<div class="d-flex justify-content-center links">
+				<a th:href="${link}" href="#" class="ml-2" th:text="'Cadastre-se como ' + ${target}"></a>
+			</div>
+		</div>
+	</section>	
 </body>
 </html>

@@ -87,23 +87,23 @@
 					</div>
 				</div>
 				<div class="d-flex justify-content-center form_container">
-					<form method="post" action="#" th:object="${user}" >
+					<form method="post" action="#" th:action="@{/usuario/autentication}" th:object="${usuarioForm}" >
+						<span th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}">Error</span><br>
+						<span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}">Error</span>
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
 							<input type="text" th:field="*{usuario}" class="form-control input_user" placeholder="usuário" th:required="required" />
-							<span th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}">Error</span><br>
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
 							<input type="text" th:field="*{senha}" class="form-control input_pass" placeholder="senha" th:required="required" />
-							<span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}">Error</span><br>
 						</div>
 						<div class="d-flex justify-content-center mt-3 login_container">
-				 			<button type="button" name="button" class="btn login_btn">Login</button>
+				 			<button type="submit" name="button" class="btn login_btn">Login</button>
 				   		</div>
 					</form>	
 				</div>

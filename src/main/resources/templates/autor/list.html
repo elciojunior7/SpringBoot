@@ -12,6 +12,7 @@
 		<span class=" fas fa-feather-alt"></span><h1>AUTORES</h1>
 	</header>
 	<section layout:fragment="content" class="autorLivro" >
+		<a href="#" th:href="@{/usuario/logout}" class="btn btn-info font-weight-bold float-right"><i class="far fa-file"></i> Logout</a>
 		<form method="post" action="#" th:action="@{/autor/gravar}" th:object="${autor}" class="jumbotron">
 			<input type="hidden" th:field="*{id}" />
 			<div class="row justify-content-md-center">
